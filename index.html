@@ -1,266 +1,351 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Atom, 
-  Cpu, 
-  Rocket, 
-  ShieldCheck, 
-  Microscope, 
-  BrainCircuit, 
-  ExternalLink, 
-  Music, 
-  AlertTriangle,
-  Calendar,
-  Zap,
-  ArrowRight,
-  ChevronDown,
-  RotateCw,
-  User
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Frontiers | Hartselle Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+        }
 
-const App = () => {
-  const [isQuantum, setIsQuantum] = useState(false);
-  const [sliderValue, setSliderValue] = useState(50);
-  const [dice, setDice] = useState({ a: '?', b: '?' });
-  const [isRolling, setIsRolling] = useState(false);
+        .quantum-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .7; transform: scale(1.1); }
+        }
 
-  const rollEntangled = () => {
-    const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-    setIsRolling(true);
-    setTimeout(() => {
-      const rollIndex = Math.floor(Math.random() * 6);
-      setDice({ a: diceFaces[rollIndex], b: diceFaces[rollIndex] });
-      setIsRolling(false);
-    }, 600);
-  };
+        .spin-slow {
+            animation: spin 3s linear infinite;
+        }
 
-  const sections = [
-    { id: 'foundation', label: 'The Wall', icon: <Cpu size={18} /> },
-    { id: 'physics', label: 'Simulations', icon: <Zap size={18} /> },
-    { id: 'pioneers', label: 'Pioneers', icon: <User size={18} /> },
-    { id: 'huntsville', label: 'Huntsville', icon: <Rocket size={18} /> },
-  ];
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-  return (
-    <div className="min-h-screen bg-[#0d0d0d] text-slate-100 font-sans selection:bg-red-600/30 scroll-smooth">
-      {/* --- CIRCUIT OVERLAY --- */}
-      <div className="fixed inset-0 pointer-events-none opacity-20">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_100%_200px,#dc262610,transparent)]"></div>
-      </div>
+        input[type=range] {
+            cursor: pointer;
+        }
 
-      {/* --- FLOATING NAV --- */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-black/60 backdrop-blur-xl border border-red-600/20 shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-full px-2 py-1 hidden md:flex items-center gap-1">
-        {sections.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => scrollToSection(s.id)}
-            className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300"
-          >
-            {s.icon}
-            {s.label}
-          </button>
-        ))}
-      </nav>
+        /* Selection highlight */
+        ::selection {
+            background: rgba(220, 38, 38, 0.3);
+            color: white;
+        }
+    </style>
+</head>
+<body class="text-slate-100 selection:bg-red-600/30">
 
-      {/* --- HERO SECTION --- */}
-      <header className="min-h-screen flex flex-col justify-center relative overflow-hidden px-6">
-        <div className="max-w-6xl mx-auto w-full relative z-10 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/10 border border-red-600/30 text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-8">
-            <Zap size={14} className="fill-red-500" /> Tiger Lab: Hartselle Edition
-          </div>
-          <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-6 leading-none">
-            QUANTUM <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-red-500 to-white drop-shadow-[0_0_15px_rgba(220,38,38,0.3)]">
-              FRONTIERS
-            </span>
-          </h1>
-          <p className="text-xl text-slate-400 max-w-2xl leading-relaxed mb-10 border-l-2 border-red-600 pl-6 mx-auto md:mx-0">
-            Bringing the "Rocket City" revolution to Hartselle. Explore the quantum world in Tiger Red and White.
-          </p>
-          <div className="flex flex-col md:flex-row items-center gap-8 justify-center md:justify-start">
-            <button 
-              onClick={() => scrollToSection('foundation')}
-              className="group bg-red-600 text-white px-10 py-4 rounded-full font-black flex items-center gap-3 transition-all hover:bg-white hover:text-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)]"
-            >
-              INITIALIZE PROBE <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-      </header>
+    <!-- --- CIRCUIT OVERLAY --- -->
+    <div class="fixed inset-0 pointer-events-none opacity-20 z-0">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_800px_at_100%_200px,#dc262610,transparent)]"></div>
+    </div>
 
-      {/* --- SECTION 01: THE WALL --- */}
-      <section id="foundation" className="py-32 max-w-6xl mx-auto px-6 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div>
-            <div className="text-red-600 font-mono mb-4 flex items-center gap-2">
-              <span className="h-px w-8 bg-red-600"></span> 01 / LIMITATION
-            </div>
-            <h2 className="text-4xl font-black mb-8 text-white">The Silicon Wall</h2>
-            <div className="space-y-6 text-slate-400 text-lg leading-relaxed">
-              <p>Silicon is reaching its <strong>Atomic Ceiling</strong>. Transistors are now so small that electrons simply "teleport" through them, breaking standard logic.</p>
-              <div className="p-6 bg-red-600/5 border border-red-600/20 rounded-2xl flex gap-5">
-                <AlertTriangle className="text-red-600 shrink-0" size={28} />
-                <div>
-                  <h4 className="font-bold text-white mb-1 uppercase tracking-tight text-sm">Quantum Tunneling</h4>
-                  <p className="text-sm">Information leaks through barriers that used to be solid.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- --- FLOATING NAV --- -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-black/60 backdrop-blur-xl border border-red-600/20 shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-full px-2 py-1 hidden md:flex items-center gap-1">
+        <button onclick="scrollToSection('foundation')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
+            <i data-lucide="cpu" class="w-[18px] h-[18px]"></i> The Wall
+        </button>
+        <button onclick="scrollToSection('physics')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
+            <i data-lucide="zap" class="w-[18px] h-[18px]"></i> Simulations
+        </button>
+        <button onclick="scrollToSection('pioneers')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
+            <i data-lucide="user" class="w-[18px] h-[18px]"></i> Pioneers
+        </button>
+        <button onclick="scrollToSection('huntsville')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
+            <i data-lucide="rocket" class="w-[18px] h-[18px]"></i> Huntsville
+        </button>
+    </nav>
 
-          <div className="bg-black/40 border border-white/5 rounded-[3rem] p-12 relative overflow-hidden flex flex-col items-center">
-            <div className="flex justify-between w-full items-center mb-12">
-              <h3 className="font-bold uppercase tracking-widest text-[10px] text-slate-500">Visualization Engine</h3>
-              <button 
-                onClick={() => setIsQuantum(!isQuantum)} 
-                className={`px-4 py-2 rounded-full text-[10px] font-black tracking-tighter transition-all ${isQuantum ? 'bg-red-600 text-white' : 'bg-slate-800 text-slate-400'}`}
-              >
-                {isQuantum ? 'QUANTUM MODE' : 'CLASSICAL MODE'}
-              </button>
-            </div>
-            <div className={`relative w-40 h-40 flex items-center justify-center rounded-full border-2 transition-all duration-700 ${isQuantum ? 'border-red-600 rotate-45' : 'border-slate-700'}`}>
-              <div className={`w-8 h-8 rounded-full shadow-lg transition-all duration-700 ${isQuantum ? 'bg-red-600 animate-pulse' : 'bg-slate-500 -translate-y-12'}`}></div>
-              {isQuantum && <div className="absolute inset-0 border border-red-600/30 rounded-full animate-[spin_3s_linear_infinite]"></div>}
-            </div>
-            <p className={`mt-10 text-xl font-black ${isQuantum ? 'text-red-600' : 'text-slate-500'}`}>{isQuantum ? 'Superposition' : 'Static Binary'}</p>
-          </div>
-        </div>
-      </section>
+    <!-- --- HERO SECTION --- -->
+    <header class="min-h-screen flex flex-col justify-center relative overflow-hidden px-6">
+        <div class="max-w-6xl mx-auto w-full relative z-10 text-center md:text-left">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/10 border border-red-600/30 text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-8">
+                <i data-lucide="zap" class="w-3.5 h-3.5 fill-red-500"></i> Tiger Lab: Hartselle Edition
+            </div>
+            <h1 class="text-6xl md:text-9xl font-black tracking-tighter mb-6 leading-none">
+                QUANTUM <br />
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-red-500 to-white drop-shadow-[0_0_15px_rgba(220,38,38,0.3)]">
+                    FRONTIERS
+                </span>
+            </h1>
+            <p class="text-xl text-slate-400 max-w-2xl leading-relaxed mb-10 border-l-2 border-red-600 pl-6 mx-auto md:mx-0">
+                Bringing the "Rocket City" revolution to Hartselle. Explore the quantum world in Tiger Red and White.
+            </p>
+            <div class="flex flex-col md:flex-row items-center gap-8 justify-center md:justify-start">
+                <button onclick="scrollToSection('foundation')" class="group bg-red-600 text-white px-10 py-4 rounded-full font-black flex items-center gap-3 transition-all hover:bg-white hover:text-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)]">
+                    INITIALIZE PROBE <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-      {/* --- SECTION 02: SIMULATIONS (SUPERPOSITION & ENTANGLEMENT) --- */}
-      <section id="physics" className="py-32 bg-[#121212] border-y border-white/5 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-red-500 font-mono mb-4 flex items-center gap-2">
-            <span className="h-px w-8 bg-red-500"></span> 02 / INTERACTIVE LAB
-          </div>
-          <h2 className="text-4xl font-black mb-16 text-white uppercase tracking-tighter">Live Quantum Experiments</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Superposition Tuner */}
-            <div className="bg-black/60 border border-white/10 p-10 rounded-[2.5rem] group">
-              <h3 className="text-2xl font-bold mb-4 text-white">Superposition Tuner</h3>
-              <p className="text-slate-400 text-sm mb-8 leading-relaxed">Adjust the probability of the qubit state before measurement.</p>
-              
-              <div className="relative h-48 flex items-center justify-center mb-8">
-                <div 
-                  className="w-32 h-32 rounded-full transition-all duration-300 shadow-[0_0_40px_rgba(220,38,38,0.2)]"
-                  style={{
-                    background: `radial-gradient(circle, #dc2626 ${sliderValue}%, #334155 ${100 - sliderValue}%)`,
-                    filter: `blur(${isQuantum ? (100-sliderValue)/10 : 0}px)`
-                  }}
-                />
-              </div>
-              
-              <input 
-                type="range" 
-                min="0" max="100" 
-                value={sliderValue} 
-                onChange={(e) => setSliderValue(e.target.value)}
-                className="w-full accent-red-600 mb-4"
-              />
-              <div className="flex justify-between font-mono text-xs text-slate-500 uppercase tracking-widest">
-                <span>State 0: {100 - sliderValue}%</span>
-                <span>State 1: {sliderValue}%</span>
-              </div>
-            </div>
+    <!-- --- SECTION 01: THE WALL --- -->
+    <section id="foundation" class="py-32 max-w-6xl mx-auto px-6 relative">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+                <div class="text-red-600 font-mono mb-4 flex items-center gap-2">
+                    <span class="h-px w-8 bg-red-600"></span> 01 / LIMITATION
+                </div>
+                <h2 class="text-4xl font-black mb-8 text-white">The Silicon Wall</h2>
+                <div class="space-y-6 text-slate-400 text-lg leading-relaxed">
+                    <p>Silicon is reaching its <strong>Atomic Ceiling</strong>. Transistors are now so small that electrons simply "teleport" through them, breaking standard logic.</p>
+                    <div class="p-6 bg-red-600/5 border border-red-600/20 rounded-2xl flex gap-5">
+                        <i data-lucide="alert-triangle" class="text-red-600 shrink-0 w-7 h-7"></i>
+                        <div>
+                            <h4 class="font-bold text-white mb-1 uppercase tracking-tight text-sm">Quantum Tunneling</h4>
+                            <p class="text-sm text-slate-400">Information leaks through barriers that used to be solid.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            {/* Entanglement Dice */}
-            <div className="bg-black/60 border border-white/10 p-10 rounded-[2.5rem] flex flex-col">
-              <h3 className="text-2xl font-bold mb-4 text-white">The Entangled Pair</h3>
-              <p className="text-slate-400 text-sm mb-8 leading-relaxed">Roll the "Hartselle" die; the "Deep Space" die updates instantly.</p>
-              
-              <div className="flex justify-around items-center flex-grow mb-8">
-                <div className={`text-6xl ${isRolling ? 'animate-bounce' : ''} text-red-600`}>{dice.a}</div>
-                <div className="h-px w-12 bg-red-600/30"></div>
-                <div className={`text-6xl ${isRolling ? 'animate-bounce' : ''} text-slate-300`}>{dice.b}</div>
-              </div>
+            <div class="bg-black/40 border border-white/5 rounded-[3rem] p-12 relative overflow-hidden flex flex-col items-center">
+                <div class="flex justify-between w-full items-center mb-12">
+                    <h3 class="font-bold uppercase tracking-widest text-[10px] text-slate-500">Visualization Engine</h3>
+                    <button id="toggle-quantum" class="px-4 py-2 rounded-full text-[10px] font-black tracking-tighter transition-all bg-slate-800 text-slate-400 hover:opacity-80">
+                        CLASSICAL MODE
+                    </button>
+                </div>
+                <div id="vis-circle" class="relative w-40 h-40 flex items-center justify-center rounded-full border-2 transition-all duration-700 border-slate-700">
+                    <div id="vis-dot" class="w-8 h-8 rounded-full shadow-lg transition-all duration-700 bg-slate-500 -translate-y-12"></div>
+                    <div id="vis-ring" class="absolute inset-0 border border-red-600/30 rounded-full hidden spin-slow"></div>
+                </div>
+                <p id="vis-label" class="mt-10 text-xl font-black text-slate-500 transition-colors">Static Binary</p>
+            </div>
+        </div>
+    </section>
 
-              <button 
-                onClick={rollEntangled}
-                disabled={isRolling}
-                className="w-full py-4 bg-white text-black rounded-xl font-black uppercase tracking-widest text-xs hover:bg-red-600 hover:text-white transition-all disabled:opacity-50"
-              >
-                {isRolling ? 'ENTANGLING...' : 'TRIGGER CORRELATION'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- --- SECTION 02: SIMULATIONS --- -->
+    <section id="physics" class="py-32 bg-[#121212] border-y border-white/5 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-red-500 font-mono mb-4 flex items-center gap-2">
+                <span class="h-px w-8 bg-red-500"></span> 02 / INTERACTIVE LAB
+            </div>
+            <h2 class="text-4xl font-black mb-16 text-white uppercase tracking-tighter">Live Quantum Experiments</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Superposition Tuner -->
+                <div class="bg-black/60 border border-white/10 p-10 rounded-[2.5rem] group">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Superposition Tuner</h3>
+                    <p class="text-slate-400 text-sm mb-8 leading-relaxed">Adjust the probability of the qubit state before measurement.</p>
+                    
+                    <div class="relative h-48 flex items-center justify-center mb-8">
+                        <div id="tuner-gradient" class="w-32 h-32 rounded-full transition-all duration-300 shadow-[0_0_40px_rgba(220,38,38,0.2)]"></div>
+                    </div>
+                    
+                    <input id="prob-slider" type="range" min="0" max="100" value="50" class="w-full h-2 bg-slate-700 rounded-lg appearance-none accent-red-600 mb-4" />
+                    
+                    <div class="flex justify-between font-mono text-xs text-slate-500 uppercase tracking-widest">
+                        <span id="label-state0">State 0: 50%</span>
+                        <span id="label-state1">State 1: 50%</span>
+                    </div>
+                </div>
 
-      {/* --- SECTION 03: PIONEERS --- */}
-      <section id="pioneers" className="py-32 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <div className="text-red-500 font-mono mb-4 flex items-center gap-2">
-            <span className="h-px w-8 bg-red-500"></span> 03 / ARCHITECTS
-          </div>
-          <h2 className="text-4xl font-black mb-16 text-white">Quantum Pioneers</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { 
-                name: "Richard Feynman", 
-                role: "The Visionary", 
-                desc: "The physicist who first realized that we need quantum computers to simulate nature." 
-              },
-              { 
-                name: "Peter Shor", 
-                role: "The Cryptographer", 
-                desc: "The mathematician who proved quantum computers could unlock almost all modern internet secrets." 
-              },
-              { 
-                name: "Michelle Simmons", 
-                role: "The Engineer", 
-                desc: "Leader in creating qubits from single atoms, proving hardware can reach this scale." 
-              }
-            ].map((person, i) => (
-              <div key={i} className="group p-8 rounded-[2rem] bg-black/40 border border-white/5 hover:border-red-600/50 transition-all">
-                <div className="p-4 rounded-2xl bg-red-600/10 text-red-500 w-fit mb-6"><User size={24} /></div>
-                <h3 className="text-xl font-bold mb-1 text-white">{person.name}</h3>
-                <p className="text-red-600 text-[10px] font-black uppercase tracking-[0.2em] mb-4">{person.role}</p>
-                <p className="text-sm text-slate-400 leading-relaxed">{person.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <!-- Entanglement Dice -->
+                <div class="bg-black/60 border border-white/10 p-10 rounded-[2.5rem] flex flex-col">
+                    <h3 class="text-2xl font-bold mb-4 text-white">The Entangled Pair</h3>
+                    <p class="text-slate-400 text-sm mb-8 leading-relaxed">Roll the "Hartselle" die; the "Deep Space" die updates instantly.</p>
+                    
+                    <div class="flex justify-around items-center flex-grow mb-8">
+                        <div id="die-a" class="text-6xl text-red-600 transition-all duration-300">?</div>
+                        <div class="h-px w-12 bg-red-600/30"></div>
+                        <div id="die-b" class="text-6xl text-slate-300 transition-all duration-300">?</div>
+                    </div>
 
-      {/* --- SECTION 04: HUNTSVILLE --- */}
-      <section id="huntsville" className="py-32 max-w-6xl mx-auto px-6">
-        <div className="text-red-600 font-mono mb-4 flex items-center gap-2">
-          <span className="h-px w-8 bg-red-600"></span> 04 / REGIONAL HUB
-        </div>
-        <h2 className="text-4xl font-black mb-12 text-white">Huntsville to Hartselle</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-10 rounded-[2.5rem] bg-red-600/5 border border-red-600/20 relative group overflow-hidden">
-             <Rocket size={120} className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform" />
-             <h3 className="text-2xl font-bold mb-4 text-red-500 tracking-tight">Redstone Pipeline</h3>
-             <p className="text-slate-400 text-sm leading-relaxed">Training the next generation of Hartselle students for the high-tech careers at the Arsenal and UAH.</p>
-          </div>
-          <div className="p-10 rounded-[2.5rem] bg-slate-900 border border-white/5 relative overflow-hidden">
-             <div className="absolute top-6 right-6 w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
-             <h3 className="text-2xl font-bold mb-4 text-white tracking-tight">Davidson Technologies</h3>
-             <p className="text-slate-400 text-sm leading-relaxed">Providing the physical hardware that makes Alabama one of the few quantum centers in the South.</p>
-          </div>
-        </div>
-      </section>
+                    <button id="roll-btn" class="w-full py-4 bg-white text-black rounded-xl font-black uppercase tracking-widest text-xs hover:bg-red-600 hover:text-white transition-all disabled:opacity-50">
+                        TRIGGER CORRELATION
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      {/* --- FOOTER --- */}
-      <footer className="bg-black/90 border-t border-red-600/20 py-24 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="w-16 h-1 bg-red-600 mx-auto mb-8"></div>
-          <h3 className="text-3xl font-black tracking-tighter mb-4 text-white">SYDNEY GILLSTRAP</h3>
-          <p className="text-slate-500 text-xs tracking-[0.5em] uppercase mb-4">Quantum Frontiers • Tigers Edition</p>
-          <p className="text-slate-600 text-[10px] uppercase font-bold tracking-widest">© 2026 Hartselle, AL</p>
-        </div>
-      </footer>
-    </div>
-  );
-};
+    <!-- --- SECTION 03: PIONEERS --- -->
+    <section id="pioneers" class="py-32 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-red-500 font-mono mb-4 flex items-center gap-2">
+                <span class="h-px w-8 bg-red-500"></span> 03 / ARCHITECTS
+            </div>
+            <h2 class="text-4xl font-black mb-16 text-white">Quantum Pioneers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Richard Feynman -->
+                <div class="group p-8 rounded-[2rem] bg-black/40 border border-white/5 hover:border-red-600/50 transition-all">
+                    <div class="p-4 rounded-2xl bg-red-600/10 text-red-500 w-fit mb-6"><i data-lucide="user"></i></div>
+                    <h3 class="text-xl font-bold mb-1 text-white">Richard Feynman</h3>
+                    <p class="text-red-600 text-[10px] font-black uppercase tracking-[0.2em] mb-4">The Visionary</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">The physicist who first realized that we need quantum computers to simulate nature.</p>
+                </div>
+                <!-- Peter Shor -->
+                <div class="group p-8 rounded-[2rem] bg-black/40 border border-white/5 hover:border-red-600/50 transition-all">
+                    <div class="p-4 rounded-2xl bg-red-600/10 text-red-500 w-fit mb-6"><i data-lucide="user"></i></div>
+                    <h3 class="text-xl font-bold mb-1 text-white">Peter Shor</h3>
+                    <p class="text-red-600 text-[10px] font-black uppercase tracking-[0.2em] mb-4">The Cryptographer</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">The mathematician who proved quantum computers could unlock almost all modern internet secrets.</p>
+                </div>
+                <!-- Michelle Simmons -->
+                <div class="group p-8 rounded-[2rem] bg-black/40 border border-white/5 hover:border-red-600/50 transition-all">
+                    <div class="p-4 rounded-2xl bg-red-600/10 text-red-500 w-fit mb-6"><i data-lucide="user"></i></div>
+                    <h3 class="text-xl font-bold mb-1 text-white">Michelle Simmons</h3>
+                    <p class="text-red-600 text-[10px] font-black uppercase tracking-[0.2em] mb-4">The Engineer</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Leader in creating qubits from single atoms, proving hardware can reach this scale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-export default App;
+    <!-- --- SECTION 04: HUNTSVILLE --- -->
+    <section id="huntsville" class="py-32 max-w-6xl mx-auto px-6">
+        <div class="text-red-600 font-mono mb-4 flex items-center gap-2">
+            <span class="h-px w-8 bg-red-600"></span> 04 / REGIONAL HUB
+        </div>
+        <h2 class="text-4xl font-black mb-12 text-white">Huntsville to Hartselle</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="p-10 rounded-[2.5rem] bg-red-600/5 border border-red-600/20 relative group overflow-hidden">
+                <i data-lucide="rocket" class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform w-32 h-32"></i>
+                <h3 class="text-2xl font-bold mb-4 text-red-500 tracking-tight">Redstone Pipeline</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Training the next generation of Hartselle students for the high-tech careers at the Arsenal and UAH.</p>
+            </div>
+            <div class="p-10 rounded-[2.5rem] bg-slate-900 border border-white/5 relative overflow-hidden">
+                <div class="absolute top-6 right-6 w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
+                <h3 class="text-2xl font-bold mb-4 text-white tracking-tight">Davidson Technologies</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Providing the physical hardware that makes Alabama one of the few quantum centers in the South.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- FOOTER --- -->
+    <footer class="bg-black/90 border-t border-red-600/20 py-24 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="w-16 h-1 bg-red-600 mx-auto mb-8"></div>
+            <h3 class="text-3xl font-black tracking-tighter mb-4 text-white">SYDNEY GILLSTRAP</h3>
+            <p class="text-slate-500 text-xs tracking-[0.5em] uppercase mb-4">Quantum Frontiers • Tigers Edition</p>
+            <p class="text-slate-600 text-[10px] uppercase font-bold tracking-widest">© 2026 Hartselle, AL</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- LUCIDE INIT ---
+        lucide.createIcons();
+
+        // --- NAVIGATION ---
+        function scrollToSection(id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- STATE MANAGEMENT ---
+        let isQuantum = false;
+        let sliderValue = 50;
+        let isRolling = false;
+
+        // --- DOM REFERENCES ---
+        const toggleBtn = document.getElementById('toggle-quantum');
+        const visCircle = document.getElementById('vis-circle');
+        const visDot = document.getElementById('vis-dot');
+        const visRing = document.getElementById('vis-ring');
+        const visLabel = document.getElementById('vis-label');
+
+        const probSlider = document.getElementById('prob-slider');
+        const tunerGradient = document.getElementById('tuner-gradient');
+        const label0 = document.getElementById('label-state0');
+        const label1 = document.getElementById('label-state1');
+
+        const rollBtn = document.getElementById('roll-btn');
+        const dieA = document.getElementById('die-a');
+        const dieB = document.getElementById('die-b');
+
+        // --- VISUALIZATION LOGIC ---
+        toggleBtn.addEventListener('click', () => {
+            isQuantum = !isQuantum;
+            
+            if (isQuantum) {
+                toggleBtn.textContent = 'QUANTUM MODE';
+                toggleBtn.classList.replace('bg-slate-800', 'bg-red-600');
+                toggleBtn.classList.replace('text-slate-400', 'text-white');
+                
+                visCircle.classList.replace('border-slate-700', 'border-red-600');
+                visCircle.classList.add('rotate-45');
+                
+                visDot.classList.replace('bg-slate-500', 'bg-red-600');
+                visDot.classList.add('animate-pulse');
+                visDot.style.transform = 'translateY(0)';
+                
+                visRing.classList.remove('hidden');
+                visLabel.textContent = 'Superposition';
+                visLabel.classList.replace('text-slate-500', 'text-red-600');
+            } else {
+                toggleBtn.textContent = 'CLASSICAL MODE';
+                toggleBtn.classList.replace('bg-red-600', 'bg-slate-800');
+                toggleBtn.classList.replace('text-white', 'text-slate-400');
+                
+                visCircle.classList.replace('border-red-600', 'border-slate-700');
+                visCircle.classList.remove('rotate-45');
+                
+                visDot.classList.replace('bg-red-600', 'bg-slate-500');
+                visDot.classList.remove('animate-pulse');
+                visDot.style.transform = 'translateY(-3rem)';
+                
+                visRing.classList.add('hidden');
+                visLabel.textContent = 'Static Binary';
+                visLabel.classList.replace('text-red-600', 'text-slate-500');
+            }
+            updateTuner();
+        });
+
+        // --- TUNER LOGIC ---
+        function updateTuner() {
+            sliderValue = probSlider.value;
+            const blur = isQuantum ? (100 - sliderValue) / 10 : 0;
+            
+            tunerGradient.style.background = `radial-gradient(circle, #dc2626 ${sliderValue}%, #334155 ${100 - sliderValue}%)`;
+            tunerGradient.style.filter = `blur(${blur}px)`;
+            
+            label0.textContent = `State 0: ${100 - sliderValue}%`;
+            label1.textContent = `State 1: ${sliderValue}%`;
+        }
+
+        probSlider.addEventListener('input', updateTuner);
+        updateTuner();
+
+        // --- DICE LOGIC ---
+        const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+        
+        rollBtn.addEventListener('click', () => {
+            if (isRolling) return;
+            
+            isRolling = true;
+            rollBtn.disabled = true;
+            rollBtn.textContent = 'ENTANGLING...';
+            
+            dieA.classList.add('animate-bounce');
+            dieB.classList.add('animate-bounce');
+
+            setTimeout(() => {
+                const rollIndex = Math.floor(Math.random() * 6);
+                const face = diceFaces[rollIndex];
+                
+                dieA.textContent = face;
+                dieB.textContent = face;
+                
+                dieA.classList.remove('animate-bounce');
+                dieB.classList.remove('animate-bounce');
+                
+                rollBtn.disabled = false;
+                rollBtn.textContent = 'TRIGGER CORRELATION';
+                isRolling = false;
+            }, 600);
+        });
+    </script>
+</body>
+</html>
