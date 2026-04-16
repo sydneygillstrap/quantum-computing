@@ -28,7 +28,7 @@
             width: 100%;
             height: 40px;
             border-radius: 8px;
-            filter: invert(100%) hue-rotate(180deg) brightness(1.5); /* Adjusts default player to match red/dark theme */
+            filter: invert(100%) hue-rotate(180deg) brightness(1.5);
         }
 
         .glass-card {
@@ -68,6 +68,7 @@
         <button onclick="scrollToSection('physics')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all">Simulations</button>
         <button onclick="scrollToSection('shor')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all">Podcast</button>
         <button onclick="scrollToSection('careers')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all">Careers</button>
+        <button onclick="scrollToSection('huntsville')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all">Huntsville</button>
     </nav>
 
     <!-- --- HERO SECTION --- -->
@@ -109,6 +110,51 @@
         </div>
     </section>
 
+    <!-- --- SECTION 02: SIMULATIONS --- -->
+    <section id="physics" class="py-32 bg-[#121212] border-y border-white/5 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-red-500 font-mono mb-4">02 / SIMULATION GUIDE</div>
+            <h2 class="text-4xl font-black mb-16 text-white uppercase italic">Hands-On Quantum Lab</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Superposition Tuner -->
+                <div class="bg-black/60 border border-white/10 p-10 rounded-[2.5rem] flex flex-col">
+                    <h3 class="text-2xl font-bold mb-4 text-white flex items-center gap-3">
+                        <i data-lucide="music" class="text-red-600 w-6 h-6"></i> The Musical Chord
+                    </h3>
+                    <div class="relative h-48 flex items-center justify-center mb-8 bg-black/40 rounded-3xl">
+                        <div id="tuner-sphere" class="w-24 h-24 rounded-full transition-all duration-300 shadow-[0_0_60px_rgba(220,38,38,0.3)]"></div>
+                    </div>
+                    <input id="prob-slider" type="range" min="0" max="100" value="50" class="w-full mb-4" />
+                    <div class="flex justify-between font-mono text-[10px] text-slate-500 uppercase tracking-widest">
+                        <span id="label-0">Note C: 50%</span>
+                        <span id="label-1">Note G: 50%</span>
+                    </div>
+                </div>
+
+                <!-- Entanglement Dice -->
+                <div class="bg-black/60 border border-white/10 p-10 rounded-[2.5rem] flex flex-col">
+                    <h3 class="text-2xl font-bold mb-4 text-white flex items-center gap-3">
+                        <i data-lucide="zap" class="text-red-600 w-6 h-6"></i> Spooky Dice
+                    </h3>
+                    <div class="flex justify-around items-center flex-grow mb-8 bg-black/40 rounded-3xl p-8">
+                        <div class="text-center">
+                            <div class="text-[10px] text-red-500 mb-2">HARTSELLE</div>
+                            <div id="die-a" class="text-5xl text-red-600">?</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-[10px] text-slate-500 mb-2">DEEP SPACE</div>
+                            <div id="die-b" class="text-5xl text-slate-300">?</div>
+                        </div>
+                    </div>
+                    <button id="roll-btn" class="w-full py-4 bg-white text-black rounded-xl font-black uppercase tracking-widest text-xs hover:bg-red-600 hover:text-white transition-all">
+                        TRIGGER CORRELATION
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- --- SECTION 03: SHOR'S ALGORITHM & PODCAST --- -->
     <section id="shor" class="py-32 bg-[#0d0d0d] px-6">
         <div class="max-w-6xl mx-auto">
@@ -122,26 +168,19 @@
                     </div>
                     
                     <p class="text-slate-300 leading-relaxed mb-8 italic border-l-4 border-red-600 pl-6">
-                        "Imagine every secret on the internet—your bank codes, the Army's flight plans—is locked behind a door that takes a trillion years to pick. Shor's Algorithm is the master key."
+                        "Imagine every secret on the internet is locked behind a door that takes a trillion years to pick. Shor's Algorithm is the master key."
                     </p>
                     
-                    <!-- ENHANCED AUDIO PLAYER -->
                     <div class="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-inner">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-[10px] font-black text-red-500 uppercase tracking-[0.3em]">Now Playing</span>
-                            <span class="text-[10px] font-bold text-slate-500">MP3 AUDIO</span>
-                        </div>
-                        
                         <div class="audio-container mb-4">
-                            <audio id="podcast-audio" controls preload="metadata">
-                                <!-- Using the Drive direct download export link -->
+                            <!-- Direct Download format for Drive -->
+                            <audio id="podcast-audio" controls crossorigin="anonymous">
                                 <source src="https://docs.google.com/uc?export=download&id=1tFNl77xJiRcbPYPd3iV-TGLwtJF4VoYb" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
                         </div>
-
                         <div class="flex justify-between items-center">
-                            <p class="text-[11px] text-slate-400 font-medium">Shor's Algorithm & The End of Secrets</p>
+                            <p class="text-[11px] text-slate-400 font-medium italic">Trouble playing? Try the link below:</p>
                             <a href="https://drive.google.com/file/d/1tFNl77xJiRcbPYPd3iV-TGLwtJF4VoYb/view?usp=sharing" target="_blank" class="bg-red-600/20 hover:bg-red-600 text-red-500 hover:text-white p-2 rounded-lg transition-all">
                                 <i data-lucide="external-link" class="w-4 h-4"></i>
                             </a>
@@ -151,10 +190,39 @@
 
                 <div>
                     <div class="text-red-500 font-mono mb-4">03 / THE MASTER KEY</div>
-                    <h2 class="text-4xl font-black mb-8 text-white uppercase italic">Cybersecurity & Shor</h2>
-                    <p class="text-slate-400 text-lg leading-relaxed mb-6">Quantum computers don't just work faster; they work differently. By using interference, they can crack the RSA encryption that currently protects the world's data.</p>
+                    <h2 class="text-4xl font-black mb-8 text-white uppercase italic">Shor's Algorithm</h2>
+                    <p class="text-slate-400 text-lg leading-relaxed">By using interference, quantum computers can crack the RSA encryption that protects the world's data.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- --- SECTION 04: CAREERS --- -->
+    <section id="careers" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-black mb-12 text-white uppercase italic">Future Careers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-8 bg-white/5 border border-white/10 rounded-3xl">
+                    <h4 class="font-bold text-white mb-2 uppercase">Cryptographer</h4>
+                    <p class="text-xs text-slate-400">Protecting data from quantum hacks.</p>
+                </div>
+                <div class="p-8 bg-white/5 border border-white/10 rounded-3xl">
+                    <h4 class="font-bold text-white mb-2 uppercase">Cryo-Tech</h4>
+                    <p class="text-xs text-slate-400">Maintaining the cooling systems.</p>
+                </div>
+                <div class="p-8 bg-white/5 border border-white/10 rounded-3xl">
+                    <h4 class="font-bold text-white mb-2 uppercase">Developer</h4>
+                    <p class="text-xs text-slate-400">Writing the apps of the future.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- SECTION 05: HUNTSVILLE --- -->
+    <section id="huntsville" class="py-32 bg-red-600/5 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-4xl font-black mb-8 text-white uppercase italic">Huntsville Hub</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto mb-12">From Redstone Arsenal to UAH, Alabama is leading the quantum revolution.</p>
         </div>
     </section>
 
@@ -167,7 +235,8 @@
         lucide.createIcons();
 
         function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            const el = document.getElementById(id);
+            if(el) el.scrollIntoView({ behavior: 'smooth' });
         }
 
         // --- Visual Engine Logic ---
@@ -177,7 +246,7 @@
         const visLabel = document.getElementById('vis-label');
         let isQuantum = false;
 
-        toggleBtn.addEventListener('click', () => {
+        toggleBtn?.addEventListener('click', () => {
             isQuantum = !isQuantum;
             if (isQuantum) {
                 toggleBtn.textContent = 'QUANTUM MODE';
@@ -200,13 +269,33 @@
             }
         });
 
-        // --- Audio Fix ---
-        // Ensure that clicking the container helps trigger play if the native UI is small
-        document.querySelector('.audio-container').addEventListener('click', () => {
-            const audio = document.getElementById('podcast-audio');
-            if (audio.paused) {
-                audio.play().catch(e => console.log("User interaction required first"));
-            }
+        // --- Tuner Logic ---
+        const probSlider = document.getElementById('prob-slider');
+        const tunerSphere = document.getElementById('tuner-sphere');
+        const label0 = document.getElementById('label-0');
+        const label1 = document.getElementById('label-1');
+
+        probSlider?.addEventListener('input', (e) => {
+            const val = e.target.value;
+            const blur = (100 - val) / 5;
+            tunerSphere.style.background = `radial-gradient(circle, #dc2626 ${val}%, #334155 ${100 - val}%)`;
+            tunerSphere.style.filter = `blur(${blur}px)`;
+            label0.textContent = `Note C: ${100 - val}%`;
+            label1.textContent = `Note G: ${val}%`;
+        });
+
+        // --- Dice Logic ---
+        const rollBtn = document.getElementById('roll-btn');
+        const dieA = document.getElementById('die-a');
+        const dieB = document.getElementById('die-b');
+        const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+
+        rollBtn?.addEventListener('click', () => {
+            const idx = Math.floor(Math.random() * 6);
+            dieA.textContent = diceFaces[idx];
+            dieB.textContent = diceFaces[idx];
+            rollBtn.textContent = "CORRELATED!";
+            setTimeout(() => rollBtn.textContent = "TRIGGER CORRELATION", 1000);
         });
     </script>
 </body>
