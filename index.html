@@ -23,13 +23,18 @@
             to { transform: rotate(360deg); }
         }
 
-        .pulse-red {
-            animation: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        /* Custom Audio Player Styling for Dark Mode */
+        .audio-container audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+            filter: invert(100%) hue-rotate(180deg) brightness(1.5); /* Adjusts default player to match red/dark theme */
         }
 
-        @keyframes pulse-red {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .5; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         input[type=range] {
@@ -47,31 +52,6 @@
             border-radius: 50%;
             background: #dc2626;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
-        }
-
-        /* Custom Audio Player Styling */
-        audio::-webkit-media-controls-panel {
-            background-color: #1a1a1a;
-        }
-        audio::-webkit-media-controls-play-button,
-        audio::-webkit-media-controls-current-time-display,
-        audio::-webkit-media-controls-time-remaining-display,
-        audio::-webkit-media-controls-timeline,
-        audio::-webkit-media-controls-volume-slider,
-        audio::-webkit-media-controls-mute-button {
-            filter: invert(100%) sepia(100%) saturate(500%) hue-rotate(320deg);
-        }
-
-        ::selection {
-            background: rgba(220, 38, 38, 0.3);
-            color: white;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
@@ -80,444 +60,153 @@
     <!-- --- CIRCUIT OVERLAY --- -->
     <div class="fixed inset-0 pointer-events-none opacity-20 z-0">
         <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_800px_at_100%_200px,#dc262610,transparent)]"></div>
     </div>
 
     <!-- --- FLOATING NAV --- -->
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-black/60 backdrop-blur-xl border border-red-600/20 shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-full px-2 py-1 hidden md:flex items-center gap-1">
-        <button onclick="scrollToSection('foundation')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
-            <i data-lucide="cpu" class="w-[18px] h-[18px]"></i> The Wall
-        </button>
-        <button onclick="scrollToSection('physics')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
-            <i data-lucide="zap" class="w-[18px] h-[18px]"></i> Simulations
-        </button>
-        <button onclick="scrollToSection('shor')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
-            <i data-lucide="lock" class="w-[18px] h-[18px]"></i> Shor's Algorithm
-        </button>
-        <button onclick="scrollToSection('careers')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
-            <i data-lucide="graduation-cap" class="w-[18px] h-[18px]"></i> Careers
-        </button>
-        <button onclick="scrollToSection('huntsville')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all duration-300">
-            <i data-lucide="rocket" class="w-[18px] h-[18px]"></i> Huntsville
-        </button>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-black/60 backdrop-blur-xl border border-red-600/20 shadow-2xl rounded-full px-2 py-1 hidden md:flex items-center gap-1">
+        <button onclick="scrollToSection('foundation')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all">The Wall</button>
+        <button onclick="scrollToSection('physics')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all">Simulations</button>
+        <button onclick="scrollToSection('shor')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all">Podcast</button>
+        <button onclick="scrollToSection('careers')" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-red-500 transition-all">Careers</button>
     </nav>
 
     <!-- --- HERO SECTION --- -->
     <header class="min-h-screen flex flex-col justify-center relative overflow-hidden px-6">
         <div class="max-w-6xl mx-auto w-full relative z-10 text-center md:text-left">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/10 border border-red-600/30 text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-8">
-                <i data-lucide="zap" class="w-3.5 h-3.5 fill-red-500"></i> AI Class 2026 | Study Project
+                AI Class 2026 | Study Project
             </div>
             <h1 class="text-6xl md:text-9xl font-black tracking-tighter mb-6 leading-none">
                 QUANTUM <br />
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-red-500 to-white drop-shadow-[0_0_15px_rgba(220,38,38,0.3)]">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-red-500 to-white">
                     FRONTIERS
                 </span>
             </h1>
-            <p class="text-xl text-slate-400 max-w-2xl leading-relaxed mb-10 border-l-2 border-red-600 pl-6 mx-auto md:mx-0">
-                Bringing the "Rocket City" revolution to Hartselle. Explore the quantum world where particles behave like musical chords and Alabama leads the way.
+            <p class="text-xl text-slate-400 max-w-2xl mb-10 border-l-2 border-red-600 pl-6 mx-auto md:mx-0">
+                Bringing the "Rocket City" revolution to Hartselle. Explore the quantum world where particles behave like musical chords.
             </p>
-            <div class="flex flex-col md:flex-row items-center gap-8 justify-center md:justify-start">
-                <button onclick="scrollToSection('foundation')" class="group bg-red-600 text-white px-10 py-4 rounded-full font-black flex items-center gap-3 transition-all hover:bg-white hover:text-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)]">
-                    EXPLORE UNIT GUIDE <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
-                </button>
-            </div>
+            <button onclick="scrollToSection('foundation')" class="bg-red-600 text-white px-10 py-4 rounded-full font-black uppercase tracking-widest hover:bg-white hover:text-red-600 transition-all">
+                EXPLORE UNIT
+            </button>
         </div>
     </header>
 
-    <!-- --- SECTION 01: THE WALL & COMPARISON --- -->
+    <!-- --- SECTION 01: THE WALL --- -->
     <section id="foundation" class="py-32 max-w-6xl mx-auto px-6 relative">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
-                <div class="text-red-600 font-mono mb-4 flex items-center gap-2">
-                    <span class="h-px w-8 bg-red-600"></span> 01 / DAY 1: CONCEPTS
-                </div>
+                <div class="text-red-600 font-mono mb-4">01 / DAY 1: CONCEPTS</div>
                 <h2 class="text-4xl font-black mb-8 text-white uppercase italic">The Silicon Wall</h2>
-                <div class="space-y-6 text-slate-400 text-lg leading-relaxed">
-                    <p>Standard computing is hitting a physical limit at the <strong>3nm scale</strong>. Transistors are now so small that electrons no longer obey classical rules.</p>
-                    <div class="p-6 bg-red-600/5 border border-red-600/20 rounded-2xl flex gap-5">
-                        <i data-lucide="alert-triangle" class="text-red-600 shrink-0 w-7 h-7"></i>
-                        <div>
-                            <h4 class="font-bold text-white mb-1 uppercase tracking-tight text-sm">Quantum Tunneling</h4>
-                            <p class="text-sm">Information leaks through barriers that used to be solid. In the simulation, you can see the electron "blurring" through the barrier when in Quantum Mode.</p>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-slate-400 text-lg leading-relaxed mb-6">Transistors are now so small that electrons leak through barriers. In Quantum Mode, you can see the electron "blurring" through the wall.</p>
             </div>
-
-            <div class="bg-black/40 border border-white/5 rounded-[3rem] p-12 relative overflow-hidden flex flex-col items-center shadow-2xl">
-                <div class="flex justify-between w-full items-center mb-12">
-                    <h3 class="font-bold uppercase tracking-widest text-[10px] text-slate-500">Visualization Engine</h3>
-                    <button id="toggle-quantum" class="px-4 py-2 rounded-full text-[10px] font-black tracking-tighter transition-all bg-slate-800 text-slate-400 hover:opacity-80">
-                        CLASSICAL MODE
-                    </button>
+            <div class="bg-black/40 border border-white/5 rounded-[3rem] p-12 flex flex-col items-center">
+                <button id="toggle-quantum" class="mb-10 px-6 py-2 rounded-full bg-slate-800 text-slate-400 font-bold text-xs uppercase tracking-widest">CLASSICAL MODE</button>
+                <div id="vis-circle" class="relative w-40 h-40 flex items-center justify-center rounded-full border-2 border-slate-700 transition-all duration-700">
+                    <div id="vis-dot" class="w-8 h-8 rounded-full bg-slate-500 transition-all duration-700 -translate-y-12"></div>
                 </div>
-                <div id="vis-circle" class="relative w-40 h-40 flex items-center justify-center rounded-full border-2 transition-all duration-700 border-slate-700">
-                    <div id="vis-dot" class="w-8 h-8 rounded-full shadow-lg transition-all duration-700 bg-slate-500 -translate-y-12"></div>
-                    <div id="vis-ring" class="absolute inset-0 border border-red-600/30 rounded-full hidden spin-slow"></div>
-                </div>
-                <p id="vis-label" class="mt-10 text-xl font-black text-slate-500">Static Binary (Fixed State)</p>
-                <p class="text-[10px] text-slate-500 mt-4 text-center uppercase tracking-widest leading-relaxed">
-                    Classical: Bit is either 0 or 1.<br/>
-                    Quantum: Tunneling allows probability states.
-                </p>
-            </div>
-        </div>
-
-        <!-- Comparison Table -->
-        <div class="glass-card rounded-[3rem] overflow-hidden">
-            <div class="grid grid-cols-3 bg-red-600/10 p-8 border-b border-white/10 font-black text-xs uppercase tracking-[0.3em] text-center">
-                <div class="text-left">Feature</div>
-                <div>Classical</div>
-                <div class="text-red-500">Quantum</div>
-            </div>
-            <div class="p-8 space-y-8">
-                <div class="grid grid-cols-3 items-center text-center">
-                    <div class="text-left font-bold text-slate-300">Data Storage</div>
-                    <div class="text-sm">Bits (0 or 1)</div>
-                    <div class="text-sm text-red-500 font-bold">Qubits (Superposition)</div>
-                </div>
-                <div class="grid grid-cols-3 items-center text-center">
-                    <div class="text-left font-bold text-slate-300">Best For</div>
-                    <div class="text-sm">Daily Logic (Email, Video)</div>
-                    <div class="text-sm text-red-500 font-bold">"Needle in a Haystack" Math</div>
-                </div>
-                <div class="grid grid-cols-3 items-center text-center">
-                    <div class="text-left font-bold text-slate-300">Environment</div>
-                    <div class="text-sm">Room Temperature</div>
-                    <div class="text-sm text-red-500 font-bold">Extreme Cold (-459°F)</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- --- SECTION 02: SIMULATIONS --- -->
-    <section id="physics" class="py-32 bg-[#121212] border-y border-white/5 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-red-500 font-mono mb-4 flex items-center gap-2">
-                <span class="h-px w-8 bg-red-500"></span> 02 / SIMULATION GUIDE
-            </div>
-            <h2 class="text-4xl font-black mb-16 text-white uppercase tracking-tighter italic">Hands-On Quantum Lab</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- Superposition Tuner -->
-                <div class="bg-black/60 border border-white/10 p-10 rounded-[2.5rem] group flex flex-col">
-                    <h3 class="text-2xl font-bold mb-4 text-white flex items-center gap-3">
-                        <i data-lucide="music" class="text-red-600 w-6 h-6"></i> The Musical Chord
-                    </h3>
-                    <p class="text-slate-400 text-sm mb-8 leading-relaxed">
-                        Superposition isn't "guessing fast." It's like a chord—multiple notes physically overlapping. Adjust the tuner to see the <strong>mathematical state of probability</strong>.
-                    </p>
-                    
-                    <div class="relative h-48 flex items-center justify-center mb-8 bg-black/40 rounded-3xl">
-                        <div id="tuner-sphere" class="w-24 h-24 rounded-full transition-all duration-300 shadow-[0_0_60px_rgba(220,38,38,0.3)]"></div>
-                    </div>
-                    
-                    <input id="prob-slider" type="range" min="0" max="100" value="50" class="w-full mb-4" />
-                    
-                    <div class="flex justify-between font-mono text-[10px] text-slate-500 uppercase tracking-widest mb-6">
-                        <span id="label-0">Note C: 50%</span>
-                        <span id="label-1">Note G: 50%</span>
-                    </div>
-
-                    <div class="mt-auto p-4 bg-white/5 rounded-xl border border-white/10 text-[11px] text-slate-400 leading-relaxed italic">
-                        "The 'blur' represents the qubit overlapping State 0 and State 1 simultaneously until measured."
-                    </div>
-                </div>
-
-                <!-- Entanglement Dice -->
-                <div class="bg-black/60 border border-white/10 p-10 rounded-[2.5rem] flex flex-col">
-                    <h3 class="text-2xl font-bold mb-4 text-white flex items-center gap-3">
-                        <i data-lucide="zap" class="text-red-600 w-6 h-6"></i> The Entangled Pair
-                    </h3>
-                    <p class="text-slate-400 text-sm mb-8 leading-relaxed">
-                        Einstein called it <strong>"Spooky action at a distance."</strong> Roll the die in Hartselle, and its entangled twin in Deep Space updates instantly.
-                    </p>
-                    
-                    <div class="flex justify-around items-center flex-grow mb-8 bg-black/40 rounded-3xl p-8">
-                        <div class="text-center">
-                            <div class="text-[10px] font-black text-red-500 mb-4 tracking-[0.3em]">HARTSELLE</div>
-                            <div id="die-a" class="text-6xl text-red-600 transition-all duration-300">?</div>
-                        </div>
-                        <div class="h-px w-12 bg-red-600/30"></div>
-                        <div class="text-center">
-                            <div class="text-[10px] font-black text-slate-500 mb-4 tracking-[0.3em]">DEEP SPACE</div>
-                            <div id="die-b" class="text-6xl text-slate-300 transition-all duration-300">?</div>
-                        </div>
-                    </div>
-
-                    <button id="roll-btn" class="w-full py-4 bg-white text-black rounded-xl font-black uppercase tracking-widest text-xs hover:bg-red-600 hover:text-white transition-all">
-                        TRIGGER CORRELATION
-                    </button>
-                    
-                    <div class="mt-6 p-4 bg-white/5 rounded-xl border border-white/10 text-[11px] text-slate-400 leading-relaxed italic">
-                        "Entanglement allows qubits to work in a massive synchronized web to solve complex math instantly."
-                    </div>
-                </div>
+                <p id="vis-label" class="mt-8 text-slate-500 font-bold uppercase tracking-widest text-xs">Fixed Binary State</p>
             </div>
         </div>
     </section>
 
     <!-- --- SECTION 03: SHOR'S ALGORITHM & PODCAST --- -->
-    <section id="shor" class="py-32 max-w-6xl mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="order-2 lg:order-1">
-                <div class="p-10 glass-card rounded-[3rem] border-red-600/30 relative">
-                    <i data-lucide="mic" class="absolute -top-6 -left-6 bg-red-600 p-4 rounded-full text-white shadow-xl"></i>
-                    <h3 class="text-xl font-black mb-6 text-red-500 uppercase tracking-widest italic">The Podcast Pitch</h3>
-                    <p class="text-slate-300 leading-relaxed mb-8 italic">
-                        "Imagine every secret on the internet—your bank codes, the Army's flight plans at Redstone—is locked behind a massive door. Today, that door takes a trillion years to pick. <strong>Shor’s Algorithm</strong> is the master key."
+    <section id="shor" class="py-32 bg-[#0d0d0d] px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="p-10 glass-card rounded-[3rem] border-red-600/30">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="bg-red-600 p-4 rounded-full shadow-lg">
+                            <i data-lucide="mic" class="text-white w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-white uppercase italic tracking-tighter">The Podcast Pitch</h3>
+                    </div>
+                    
+                    <p class="text-slate-300 leading-relaxed mb-8 italic border-l-4 border-red-600 pl-6">
+                        "Imagine every secret on the internet—your bank codes, the Army's flight plans—is locked behind a door that takes a trillion years to pick. Shor's Algorithm is the master key."
                     </p>
                     
-                    <!-- Audio Player Integration -->
-                    <div class="bg-black/40 p-6 rounded-2xl border border-white/10 mb-8">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shrink-0">
-                                <i data-lucide="radio" class="text-white w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Episode 1: The Master Key</h4>
-                                <p class="text-[10px] text-slate-500 uppercase">Quantum Frontiers Podcast</p>
-                            </div>
+                    <!-- ENHANCED AUDIO PLAYER -->
+                    <div class="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-inner">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[10px] font-black text-red-500 uppercase tracking-[0.3em]">Now Playing</span>
+                            <span class="text-[10px] font-bold text-slate-500">MP3 AUDIO</span>
                         </div>
-                        <audio controls class="w-full h-10 outline-none">
-                            <source src="https://drive.google.com/uc?export=download&id=1tFNl77xJiRcbPYPd3iV-TGLwtJF4VoYb" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <div class="mt-3 text-right">
-                            <a href="https://drive.google.com/file/d/1tFNl77xJiRcbPYPd3iV-TGLwtJF4VoYb/view?usp=sharing" target="_blank" class="text-[9px] font-bold text-red-500 uppercase tracking-widest hover:underline">
-                                <i data-lucide="external-link" class="inline w-3 h-3 mr-1"></i> Open in Drive
+                        
+                        <div class="audio-container mb-4">
+                            <audio id="podcast-audio" controls preload="metadata">
+                                <!-- Using the Drive direct download export link -->
+                                <source src="https://docs.google.com/uc?export=download&id=1tFNl77xJiRcbPYPd3iV-TGLwtJF4VoYb" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <p class="text-[11px] text-slate-400 font-medium">Shor's Algorithm & The End of Secrets</p>
+                            <a href="https://drive.google.com/file/d/1tFNl77xJiRcbPYPd3iV-TGLwtJF4VoYb/view?usp=sharing" target="_blank" class="bg-red-600/20 hover:bg-red-600 text-red-500 hover:text-white p-2 rounded-lg transition-all">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
                             </a>
                         </div>
                     </div>
+                </div>
 
-                    <div class="flex items-center gap-4 border-t border-white/10 pt-6">
-                        <div class="w-12 h-12 bg-red-600/20 rounded-full flex items-center justify-center">
-                            <i data-lucide="play" class="text-red-500 fill-red-500 w-4 h-4"></i>
-                        </div>
-                        <div class="text-[10px] uppercase font-bold tracking-widest text-slate-500">
-                            Unit 2: Algorithms & Interference
-                        </div>
-                    </div>
+                <div>
+                    <div class="text-red-500 font-mono mb-4">03 / THE MASTER KEY</div>
+                    <h2 class="text-4xl font-black mb-8 text-white uppercase italic">Cybersecurity & Shor</h2>
+                    <p class="text-slate-400 text-lg leading-relaxed mb-6">Quantum computers don't just work faster; they work differently. By using interference, they can crack the RSA encryption that currently protects the world's data.</p>
                 </div>
-            </div>
-            <div class="order-1 lg:order-2">
-                <div class="text-red-500 font-mono mb-4 flex items-center gap-2">
-                    <span class="h-px w-8 bg-red-500"></span> 03 / THE MASTER KEY
-                </div>
-                <h2 class="text-4xl font-black mb-8 text-white uppercase italic">Shor's Algorithm</h2>
-                <p class="text-slate-400 text-lg leading-relaxed mb-8">
-                    Standard encryption is based on finding the prime factors of giant numbers. While classical computers struggle for eons, quantum computers use <strong>Interference</strong> to find the key in minutes.
-                </p>
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                        <i data-lucide="shield-check" class="text-red-600 w-6 h-6 mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-sm text-white">Post-Quantum Cryptography</h4>
-                            <p class="text-xs text-slate-500">Redstone Arsenal is already building new codes to resist quantum attacks.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- --- SECTION 04: CAREERS --- -->
-    <section id="careers" class="py-32 bg-[#0a0a0a] px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-red-500 font-mono mb-4 flex items-center gap-2">
-                <span class="h-px w-8 bg-red-500"></span> 04 / CAREER ROADMAP 2035
-            </div>
-            <h2 class="text-4xl font-black mb-12 text-white uppercase italic">Future Proof Your Career</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                <div class="p-8 bg-white/5 border border-white/10 rounded-3xl hover:border-red-600/50 transition-all group">
-                    <i data-lucide="lock" class="text-red-600 mb-4 w-10 h-10 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="font-bold text-white mb-2 uppercase tracking-tighter">Quantum Cryptographer</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">Protecting the power grid and government databases from quantum hacks.</p>
-                </div>
-                <div class="p-8 bg-white/5 border border-white/10 rounded-3xl hover:border-red-600/50 transition-all group">
-                    <i data-lucide="thermometer-snowflake" class="text-red-600 mb-4 w-10 h-10 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="font-bold text-white mb-2 uppercase tracking-tighter">Cryo-Technician</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">Maintaining the "Golden Chandeliers" that cool qubits to -459°F.</p>
-                </div>
-                <div class="p-8 bg-white/5 border border-white/10 rounded-3xl hover:border-red-600/50 transition-all group">
-                    <i data-lucide="brain-circuit" class="text-red-600 mb-4 w-10 h-10 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="font-bold text-white mb-2 uppercase tracking-tighter">Algorithm Developer</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">Coding future "apps" using Python, Qiskit, and complex linear algebra.</p>
-                </div>
-            </div>
-
-            <div class="bg-red-600 rounded-[3rem] p-12 text-white shadow-2xl relative overflow-hidden">
-                <div class="absolute right-0 top-0 opacity-10 rotate-12 -translate-y-12 translate-x-12">
-                    <i data-lucide="graduation-cap" class="w-64 h-64"></i>
-                </div>
-                <div class="relative z-10 flex flex-col md:flex-row gap-12 items-center">
-                    <div class="flex-1">
-                        <h3 class="text-3xl font-black mb-6 leading-tight uppercase italic">High School Strategy</h3>
-                        <ul class="space-y-6">
-                            <li class="flex items-center gap-4">
-                                <span class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-sm font-black">01</span>
-                                <div>
-                                    <div class="font-bold uppercase tracking-widest text-xs">Mathematics</div>
-                                    <p class="text-sm opacity-80 font-medium">Focus on Matrices and Linear Algebra—the language of qubits.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <span class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-sm font-black">02</span>
-                                <div>
-                                    <div class="font-bold uppercase tracking-widest text-xs">Science</div>
-                                    <p class="text-sm opacity-80 font-medium">AP Physics (Waves & Optics) explains how particles interfere.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <span class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-sm font-black">03</span>
-                                <div>
-                                    <div class="font-bold uppercase tracking-widest text-xs">Coding</div>
-                                    <p class="text-sm opacity-80 font-medium">Master Python. It is the primary way we talk to the quantum cloud.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- --- SECTION 05: HUNTSVILLE --- -->
-    <section id="huntsville" class="py-32 max-w-6xl mx-auto px-6">
-        <div class="text-red-600 font-mono mb-4 flex items-center gap-2">
-            <span class="h-px w-8 bg-red-600"></span> 05 / THE ECOSYSTEM
-        </div>
-        <h2 class="text-4xl font-black mb-12 text-white uppercase italic">Huntsville: The Quantum Corridor</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="p-10 rounded-[2.5rem] bg-red-600/5 border border-red-600/20 relative group overflow-hidden">
-                <i data-lucide="rocket" class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform w-32 h-32 text-red-600"></i>
-                <h3 class="text-xl font-bold mb-4 text-red-500 uppercase tracking-tighter italic">Redstone Arsenal</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">Developing <strong>Quantum Sensing</strong> for gravity-based navigation—allowing drones to fly without GPS.</p>
-            </div>
-            <div class="p-10 rounded-[2.5rem] bg-slate-900 border border-white/5 relative overflow-hidden group">
-                <i data-lucide="microscope" class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform w-32 h-32"></i>
-                <h3 class="text-xl font-bold mb-4 text-white uppercase tracking-tighter italic">UAH & SQC</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">Leading the <strong>Southeastern Quantum Collaborative</strong> to train Alabama's future scientists.</p>
-            </div>
-            <div class="p-10 rounded-[2.5rem] bg-black border border-red-600/20 relative overflow-hidden group">
-                <i data-lucide="briefcase" class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform w-32 h-32 text-red-600"></i>
-                <h3 class="text-xl font-bold mb-4 text-white uppercase tracking-tighter italic">Defense Tech</h3>
-                <p class="text-slate-400 text-sm leading-relaxed"><strong>Davidson Technologies</strong> is building quantum testbeds in Cummings Research Park.</p>
             </div>
         </div>
     </section>
 
     <!-- --- FOOTER --- -->
-    <footer class="bg-black/90 border-t border-red-600/20 py-24 px-6">
-        <div class="max-w-6xl mx-auto text-center">
-            <div class="w-16 h-1 bg-red-600 mx-auto mb-8"></div>
-            <h3 class="text-3xl font-black tracking-tighter mb-4 text-white uppercase italic">Sydney Gillstrap</h3>
-            <p class="text-slate-500 text-xs tracking-[0.5em] uppercase mb-4">Quantum Frontiers • AI Class 2026</p>
-            <p class="text-slate-600 text-[10px] uppercase font-bold tracking-widest">Hartselle, Alabama</p>
-        </div>
+    <footer class="py-20 border-t border-white/5 text-center">
+        <p class="text-slate-600 text-[10px] uppercase font-bold tracking-[0.5em]">Sydney Gillstrap • AI Class 2026</p>
     </footer>
 
     <script>
-        // --- LUCIDE INIT ---
         lucide.createIcons();
 
-        // --- NAVIGATION ---
         function scrollToSection(id) {
-            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- STATE ---
-        let isQuantum = false;
-        let sliderValue = 50;
-        let isRolling = false;
-        const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-
-        // --- DOM ELEMENTS ---
+        // --- Visual Engine Logic ---
         const toggleBtn = document.getElementById('toggle-quantum');
         const visCircle = document.getElementById('vis-circle');
         const visDot = document.getElementById('vis-dot');
-        const visRing = document.getElementById('vis-ring');
         const visLabel = document.getElementById('vis-label');
+        let isQuantum = false;
 
-        const probSlider = document.getElementById('prob-slider');
-        const tunerSphere = document.getElementById('tuner-sphere');
-        const label0 = document.getElementById('label-0');
-        const label1 = document.getElementById('label-1');
-
-        const rollBtn = document.getElementById('roll-btn');
-        const dieA = document.getElementById('die-a');
-        const dieB = document.getElementById('die-b');
-
-        // --- VISUALIZATION ENGINE ---
         toggleBtn.addEventListener('click', () => {
             isQuantum = !isQuantum;
             if (isQuantum) {
                 toggleBtn.textContent = 'QUANTUM MODE';
-                toggleBtn.classList.replace('bg-slate-800', 'bg-red-600');
-                toggleBtn.classList.replace('text-slate-400', 'text-white');
-                visCircle.classList.replace('border-slate-700', 'border-red-600');
-                visCircle.classList.add('rotate-45');
-                visDot.classList.replace('bg-slate-500', 'bg-red-600');
-                visDot.classList.add('animate-pulse');
+                toggleBtn.className = 'mb-10 px-6 py-2 rounded-full bg-red-600 text-white font-bold text-xs uppercase tracking-widest';
+                visCircle.style.borderColor = '#dc2626';
+                visDot.style.backgroundColor = '#dc2626';
                 visDot.style.transform = 'translateY(0)';
-                visRing.classList.remove('hidden');
-                visLabel.textContent = 'Superposition (Both States)';
-                visLabel.classList.replace('text-slate-500', 'text-red-600');
+                visDot.classList.add('animate-pulse');
+                visLabel.textContent = 'Quantum Superposition';
+                visLabel.style.color = '#dc2626';
             } else {
                 toggleBtn.textContent = 'CLASSICAL MODE';
-                toggleBtn.classList.replace('bg-red-600', 'bg-slate-800');
-                toggleBtn.classList.replace('text-white', 'text-slate-400');
-                visCircle.classList.replace('border-red-600', 'border-slate-700');
-                visCircle.classList.remove('rotate-45');
-                visDot.classList.replace('bg-red-600', 'bg-slate-500');
-                visDot.classList.remove('animate-pulse');
+                toggleBtn.className = 'mb-10 px-6 py-2 rounded-full bg-slate-800 text-slate-400 font-bold text-xs uppercase tracking-widest';
+                visCircle.style.borderColor = '#334155';
+                visDot.style.backgroundColor = '#64748b';
                 visDot.style.transform = 'translateY(-3rem)';
-                visRing.classList.add('hidden');
-                visLabel.textContent = 'Static Binary (Fixed State)';
-                visLabel.classList.replace('text-red-600', 'text-slate-500');
+                visDot.classList.remove('animate-pulse');
+                visLabel.textContent = 'Fixed Binary State';
+                visLabel.style.color = '#64748b';
             }
         });
 
-        // --- TUNER LOGIC ---
-        function updateTuner() {
-            sliderValue = probSlider.value;
-            // Blur effect to represent the "chord" notes physically overlapping in the air
-            const blurAmount = (100 - sliderValue) / 5; 
-            tunerSphere.style.background = `radial-gradient(circle, #dc2626 ${sliderValue}%, #334155 ${100 - sliderValue}%)`;
-            tunerSphere.style.filter = `blur(${blurAmount}px)`;
-            tunerSphere.style.transform = `scale(${1 + (sliderValue/200)})`;
-            label0.textContent = `Note C: ${100 - sliderValue}%`;
-            label1.textContent = `Note G: ${sliderValue}%`;
-        }
-
-        probSlider.addEventListener('input', updateTuner);
-        updateTuner();
-
-        // --- DICE LOGIC (ENTANGLEMENT) ---
-        rollBtn.addEventListener('click', () => {
-            if (isRolling) return;
-            isRolling = true;
-            rollBtn.disabled = true;
-            rollBtn.textContent = 'ENTANGLING...';
-            dieA.classList.add('animate-bounce');
-            dieB.classList.add('animate-bounce');
-            dieA.textContent = "?";
-            dieB.textContent = "?";
-
-            setTimeout(() => {
-                const rollIndex = Math.floor(Math.random() * 6);
-                const face = diceFaces[rollIndex];
-                // Correlation: They must match instantly
-                dieA.textContent = face;
-                dieB.textContent = face;
-                dieA.classList.remove('animate-bounce');
-                dieB.classList.remove('animate-bounce');
-                rollBtn.disabled = false;
-                rollBtn.textContent = 'TRIGGER CORRELATION';
-                isRolling = false;
-            }, 800);
+        // --- Audio Fix ---
+        // Ensure that clicking the container helps trigger play if the native UI is small
+        document.querySelector('.audio-container').addEventListener('click', () => {
+            const audio = document.getElementById('podcast-audio');
+            if (audio.paused) {
+                audio.play().catch(e => console.log("User interaction required first"));
+            }
         });
     </script>
 </body>
