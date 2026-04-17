@@ -55,7 +55,6 @@
             box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
         }
 
-        /* Video Container Aspect Ratio */
         .aspect-video {
             position: relative;
             padding-bottom: 56.25%;
@@ -82,6 +81,15 @@
             border-radius: 50%;
             border: 4px solid #6366f1;
             animation: pulse-ring 2s infinite;
+        }
+
+        /* Custom Audio Styling */
+        audio::-webkit-media-controls-panel {
+            background-color: rgba(30, 41, 59, 0.8);
+        }
+        audio::-webkit-media-controls-current-time-display,
+        audio::-webkit-media-controls-time-remaining-display {
+            color: #fff;
         }
     </style>
 </head>
@@ -141,7 +149,6 @@
                     </div>
                     
                     <div id="sim-container" class="h-72 bg-slate-950/50 rounded-3xl border border-white/5 flex flex-col items-center justify-center relative overflow-hidden">
-                        <!-- Simulation UI -->
                         <div id="particle" class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-cyan-400 shadow-[0_0_40px_rgba(99,102,241,0.5)] flex items-center justify-center transition-all duration-700">
                             <i data-lucide="zap" class="text-slate-900 w-8 h-8"></i>
                         </div>
@@ -158,7 +165,7 @@
         </div>
     </header>
 
-    <!-- THEORY: THE THREE PILLARS -->
+    <!-- THEORY -->
     <section id="theory" class="py-32 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
@@ -173,94 +180,29 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Superposition</h3>
                     <p class="text-slate-400 leading-relaxed text-sm mb-6">A bit is a coin on a table (Heads or Tails). A <strong>Qubit</strong> is a coin spinning on the table—a blur of both states until measured.</p>
-                    <ul class="space-y-3 text-xs font-semibold text-slate-500">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Infinite Probability States</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Parallel Processing</li>
-                    </ul>
                 </div>
-
                 <div class="card-gradient p-10 rounded-[2.5rem]">
                     <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-8 border border-indigo-500/20">
                         <i data-lucide="link" class="text-indigo-400 w-7 h-7"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Entanglement</h3>
                     <p class="text-slate-400 leading-relaxed text-sm mb-6">Einstein called it "Spooky Action." Particles correlated so deeply that distance becomes irrelevant. Change one, and the other changes <strong>instantly</strong>.</p>
-                    <ul class="space-y-3 text-xs font-semibold text-slate-500">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Synchronized Systems</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Unhackable Comm Lines</li>
-                    </ul>
                 </div>
-
                 <div class="card-gradient p-10 rounded-[2.5rem]">
                     <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-8 border border-indigo-500/20">
                         <i data-lucide="waves" class="text-indigo-400 w-7 h-7"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Interference</h3>
                     <p class="text-slate-400 leading-relaxed text-sm mb-6">Like noise-canceling headphones. We use wave patterns to <strong>amplify</strong> correct paths and <strong>cancel out</strong> the millions of wrong ones.</p>
-                    <ul class="space-y-3 text-xs font-semibold text-slate-500">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Hallucination Reduction</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Targeted Solutions</li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTENT: CLASSICAL LIMITS (THE WALL) -->
-    <section class="py-24 px-6 bg-slate-950/40">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-            <div class="rounded-[3rem] overflow-hidden border border-white/5 aspect-video shadow-2xl">
-                <iframe 
-                    src="https://www.youtube.com/embed/B3U1NDUiwSA" 
-                    title="Quantum Computing Explained" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div>
-                <h2 class="text-4xl font-black mb-8 italic">Hitting the Silicon Wall</h2>
-                <div class="space-y-8">
-                    <div class="flex gap-6">
-                        <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center shrink-0 border border-white/10">
-                            <i data-lucide="thermometer" class="text-indigo-400 w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold mb-2">Thermal Limits</h4>
-                            <p class="text-sm text-slate-400">Transistors generate so much heat at the 3nm scale that they become physically impossible to cool efficiently.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6">
-                        <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center shrink-0 border border-white/10">
-                            <i data-lucide="move" class="text-indigo-400 w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold mb-2">Quantum Tunneling</h4>
-                            <p class="text-sm text-slate-400">At current scales, electrons "teleport" through gates, causing data corruption in traditional chips.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6">
-                        <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center shrink-0 border border-white/10">
-                            <i data-lucide="trending-down" class="text-indigo-400 w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold mb-2">The End of Moore's Law</h4>
-                            <p class="text-sm text-slate-400">The 60-year observation of transistor doubling is finally reaching a physical end. Quantum is the next leap.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- HUNTSVILLE FOCUS SECTION -->
+    <!-- HUNTSVILLE FOCUS -->
     <section id="huntsville" class="py-32 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="glass p-12 md:p-20 rounded-[4rem] relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-10 opacity-10">
-                    <i data-lucide="rocket" class="w-64 h-64 text-white"></i>
-                </div>
-                
                 <div class="relative z-10 grid lg:grid-cols-2 gap-16">
                     <div>
                         <div class="inline-flex items-center gap-2 text-indigo-400 text-xs font-black uppercase tracking-[0.3em] mb-6">
@@ -270,91 +212,25 @@
                             Huntsville: The South's <span class="text-indigo-400">Quantum Corridor.</span>
                         </h2>
                         <p class="text-slate-400 leading-relaxed mb-10">
-                            From the <strong>Southeastern Quantum Collaborative (SQC)</strong> launch in Jan 2026 to <strong>Davidson Technologies</strong> hosting commercial D-Wave systems, the Rocket City is the heart of global defense-based quantum research.
+                            From the <strong>Southeastern Quantum Collaborative (SQC)</strong> launch in Jan 2026 to <strong>Davidson Technologies</strong> hosting commercial D-Wave systems, the Rocket City is the heart of global defense research.
                         </p>
-                        
-                        <div class="grid grid-cols-2 gap-6 mb-10">
-                            <div class="p-6 rounded-3xl bg-white/5 border border-white/10">
-                                <h4 class="text-3xl font-black text-white mb-1">Jan 26</h4>
-                                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">SQC Official Launch</p>
-                            </div>
-                            <div class="p-6 rounded-3xl bg-white/5 border border-white/10">
-                                <h4 class="text-3xl font-black text-white mb-1">D-Wave</h4>
-                                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Local Hardware</p>
-                            </div>
-                        </div>
                     </div>
-                    
                     <div class="space-y-4">
                         <div class="p-8 rounded-3xl card-gradient flex gap-6">
                             <div class="w-12 h-12 bg-indigo-600/20 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="shield" class="text-indigo-400"></i></div>
                             <div>
                                 <h4 class="font-bold text-white mb-2">Redstone Arsenal</h4>
-                                <p class="text-xs text-slate-500 leading-relaxed">Developing "Quantum Sensing" for GPS-denied navigation—critical for Huntsville's aerospace missions.</p>
-                            </div>
-                        </div>
-                        <div class="p-8 rounded-3xl card-gradient flex gap-6">
-                            <div class="w-12 h-12 bg-indigo-600/20 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="graduation-cap" class="text-indigo-400"></i></div>
-                            <div>
-                                <h4 class="font-bold text-white mb-2">UAH Center for Applied Optics</h4>
-                                <p class="text-xs text-slate-500 leading-relaxed">Leading the way in Quantum Photonics—using light instead of electricity to process qubits.</p>
+                                <p class="text-xs text-slate-500">Developing "Quantum Sensing" for GPS-denied navigation—critical for aerospace missions.</p>
                             </div>
                         </div>
                         <div class="p-8 rounded-3xl card-gradient flex gap-6">
                             <div class="w-12 h-12 bg-indigo-600/20 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="cpu" class="text-indigo-400"></i></div>
                             <div>
                                 <h4 class="font-bold text-white mb-2">Davidson Technologies</h4>
-                                <p class="text-xs text-slate-500 leading-relaxed">One of the first local commercial installations for massive optimization and cybersecurity testing.</p>
+                                <p class="text-xs text-slate-500">One of the first local commercial installations for massive optimization and cybersecurity testing.</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CAREER ROADMAP 2035 -->
-    <section id="careers" class="py-32 px-6 relative">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-24">
-                <h2 class="text-4xl md:text-5xl font-black mb-6 italic tracking-tight">Career Roadmap 2035</h2>
-                <p class="text-slate-400">Where will you be 10 years after graduation?</p>
-            </div>
-            
-            <div class="relative">
-                <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-indigo-500/0 via-indigo-500/50 to-indigo-500/0"></div>
-                
-                <!-- Roadmap Item 1 -->
-                <div class="relative mb-24 flex flex-col md:flex-row items-center justify-between group">
-                    <div class="md:w-5/12 ml-10 md:ml-0 md:text-right">
-                        <span class="text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block">2026-2028</span>
-                        <h4 class="text-2xl font-bold mb-3">Math Mastery</h4>
-                        <p class="text-slate-400 text-sm leading-relaxed">Focusing on <strong>Linear Algebra</strong> and <strong>Matrices</strong> in Hartselle. These are the core languages used to move qubits.</p>
-                    </div>
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 w-8 h-8 rounded-full bg-slate-900 border-2 border-indigo-500 z-10 roadmap-dot"></div>
-                    <div class="md:w-5/12"></div>
-                </div>
-
-                <!-- Roadmap Item 2 -->
-                <div class="relative mb-24 flex flex-col md:flex-row-reverse items-center justify-between group">
-                    <div class="md:w-5/12 ml-10 md:ml-0">
-                        <span class="text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block">2029-2032</span>
-                        <h4 class="text-2xl font-bold mb-3">The UAH Pipeline</h4>
-                        <p class="text-slate-400 text-sm leading-relaxed">Dual enrollment and photonics research. Working with the Southeastern Quantum Collaborative testbeds.</p>
-                    </div>
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 w-8 h-8 rounded-full bg-slate-900 border-2 border-indigo-500 z-10 roadmap-dot"></div>
-                    <div class="md:w-5/12"></div>
-                </div>
-
-                <!-- Roadmap Item 3 -->
-                <div class="relative flex flex-col md:flex-row items-center justify-between group">
-                    <div class="md:w-5/12 ml-10 md:ml-0 md:text-right">
-                        <span class="text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block">2035+</span>
-                        <h4 class="text-2xl font-bold mb-3">PQC Systems Architect</h4>
-                        <p class="text-slate-400 text-sm leading-relaxed">Leading cybersecurity at Redstone Arsenal. Protecting the nation's grid with Post-Quantum Cryptography.</p>
-                    </div>
-                    <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 w-8 h-8 rounded-full bg-slate-900 border-2 border-indigo-500 z-10 roadmap-dot"></div>
-                    <div class="md:w-5/12"></div>
                 </div>
             </div>
         </div>
@@ -375,17 +251,20 @@
                     <p class="text-indigo-400 text-xs font-black uppercase tracking-[0.4em] mb-12">Recorded @ The Rocket City Hub</p>
                     
                     <div class="bg-black/40 p-10 rounded-[2.5rem] border border-white/5 mb-8">
+                        <!-- THE AUDIO PLAYER -->
                         <audio id="player" class="w-full h-12" controls crossorigin="anonymous">
-                            <source src="http://googleusercontent.com/file_content/2" type="audio/mpeg">
+                            <!-- NOTE: Replace the src below with your actual link if hosting online -->
+                            <source src="https://drive.google.com/file/d/1tFNl77xJiRcbPYPd3iV-TGLwtJF4VoYb/view?usp=sharing" type="audio/mpeg">
+                            Your browser does not support the audio element.
                         </audio>
                         <div class="flex justify-between mt-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                            <span>Episode 01: The Wall</span>
+                            <span id="audio-status">Status: Ready</span>
                             <span>Hartselle AI 2026</span>
                         </div>
                     </div>
                     
                     <p class="text-slate-500 text-xs leading-relaxed max-w-md mx-auto">
-                        Join our hosts as they dive into Superposition, Shor's Algorithm, and why the "Rocket City" is scrambling to secure our future.
+                        If the audio doesn't play in your preview, make sure the file <strong>PodcastEpisode.m4a</strong> is in the same folder as this index.html file.
                     </p>
                 </div>
             </div>
@@ -394,22 +273,10 @@
 
     <!-- FOOTER -->
     <footer class="py-20 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-indigo-600/20 rounded-lg flex items-center justify-center border border-indigo-500/20">
-                    <i data-lucide="atom" class="text-indigo-400 w-5 h-5"></i>
-                </div>
-                <span class="font-black text-sm tracking-tighter">QUANTUM<span class="text-indigo-400">FRONTIERS</span></span>
-            </div>
-            
+        <div class="max-w-7xl mx-auto px-6 text-center">
             <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">
                 Hartselle High School • AI Engineering Project 2026
             </p>
-            
-            <div class="flex gap-6">
-                <a href="#" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                <a href="#" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-            </div>
         </div>
     </footer>
 
@@ -433,28 +300,18 @@
 
         btnClassical.addEventListener('click', () => {
             mode = 'classical';
-            btnClassical.classList.add('bg-indigo-600');
-            btnClassical.classList.remove('bg-white/5');
-            btnQuantum.classList.remove('bg-indigo-600');
-            btnQuantum.classList.add('bg-white/5');
-            particle.className = 'w-16 h-16 rounded-full bg-slate-800 shadow-none flex items-center justify-center transition-all duration-700';
-            particle.style.transform = 'translateY(0)';
+            btnClassical.className = 'py-4 rounded-2xl bg-indigo-600 font-bold text-sm text-white';
+            btnQuantum.className = 'py-4 rounded-2xl bg-white/5 border border-white/10 font-bold text-sm text-white';
+            particle.className = 'w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center transition-all duration-700';
             simLabel.textContent = 'State: Deterministic (0)';
-            simLabel.classList.remove('text-indigo-400');
-            simLabel.classList.add('text-slate-600');
         });
 
         btnQuantum.addEventListener('click', () => {
             mode = 'quantum';
-            btnQuantum.classList.add('bg-indigo-600');
-            btnQuantum.classList.remove('bg-white/5');
-            btnClassical.classList.remove('bg-indigo-600');
-            btnClassical.classList.add('bg-white/5');
+            btnQuantum.className = 'py-4 rounded-2xl bg-indigo-600 font-bold text-sm text-white shadow-lg shadow-indigo-600/20';
+            btnClassical.className = 'py-4 rounded-2xl bg-white/5 border border-white/10 font-bold text-sm text-white';
             particle.className = 'w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-cyan-400 shadow-[0_0_40px_rgba(99,102,241,0.5)] flex items-center justify-center animate-pulse transition-all duration-700';
-            particle.style.transform = 'translateY(0)';
             simLabel.textContent = 'State: Superposition (0+1)';
-            simLabel.classList.add('text-indigo-400');
-            simLabel.classList.remove('text-slate-600');
         });
 
         setInterval(() => {
@@ -466,38 +323,41 @@
             }
         }, 2000);
 
-        // Podcast Player Logic
+        // PODCAST LOGIC
         const masterBtn = document.getElementById('master-play-btn');
         const audioPlayer = document.getElementById('player');
         const playIcon = document.getElementById('play-icon');
+        const statusText = document.getElementById('audio-status');
 
         masterBtn.addEventListener('click', () => {
             if (audioPlayer.paused) {
-                audioPlayer.play();
-                masterBtn.classList.add('pulse-active');
-                playIcon.setAttribute('data-lucide', 'pause');
-                playIcon.classList.remove('ml-1');
+                audioPlayer.play().catch(e => {
+                    statusText.textContent = "Error: File Not Found";
+                    console.error("Audio failed to play", e);
+                });
             } else {
                 audioPlayer.pause();
-                masterBtn.classList.remove('pulse-active');
-                playIcon.setAttribute('data-lucide', 'play');
-                playIcon.classList.add('ml-1');
             }
-            lucide.createIcons();
         });
 
         audioPlayer.onplay = () => {
             masterBtn.classList.add('pulse-active');
             playIcon.setAttribute('data-lucide', 'pause');
-            playIcon.classList.remove('ml-1');
+            statusText.textContent = "Status: Playing";
             lucide.createIcons();
         };
 
         audioPlayer.onpause = () => {
             masterBtn.classList.remove('pulse-active');
             playIcon.setAttribute('data-lucide', 'play');
-            playIcon.classList.add('ml-1');
+            statusText.textContent = "Status: Paused";
             lucide.createIcons();
+        };
+
+        // Troubleshooting helper
+        audioPlayer.onerror = () => {
+            statusText.textContent = "Status: File Missing";
+            statusText.style.color = "#ef4444";
         };
     </script>
 </body>
